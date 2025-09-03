@@ -1,0 +1,40 @@
+name: CI
+
+on:
+  push:
+    branches: [ main, master, develop ]
+  pull_request:
+    branches: [ main, master, develop ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.11'
+        
+    - name: Install dependencies
+      run: |
+        if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+        if [ -f requirements_poly.txt ]; then pip install -r requirements_poly.txt; fi
+        
+    - name: Run tests
+      run: |
+        echo "Running tests for discord-bot-automation"
+        # Add your test commands here
+        
+    - name: Security scan
+      run: |
+        echo "Running security scan for discord-bot-automation"
+        # Add security scanning commands here
+        
+    - name: Code quality check
+      run: |
+        echo "Running code quality checks for discord-bot-automation"
+        # Add code quality checks here
